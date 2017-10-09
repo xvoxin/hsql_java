@@ -1,24 +1,52 @@
-# use glob syntax.
-syntax: glob
-*.class
-*~
+.metadata
+bin/
+tmp/
+target/
+*.tmp
 *.bak
-*.old
-
-# logs
-*.log
-
-# eclipse conf file
+*.swp
+*~.nib
+local.properties
 .settings/
-.settings
+.loadpath
+.recommenders
 
-# building
-target
-tmp*
-dist
+# External tool builders
+.externalToolBuilders/
 
-# other scm
-.svn
-.CVS
-.hg*
+# Locally stored "Eclipse launch configurations"
+*.launch
 
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+# TeXlipse plugin
+.texlipse
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Code Recommenders
+.recommenders/
+
+# Scala IDE specific (Scala & Java development for Eclipse)
+.cache-main
+.scala_dependencies
+.worksheet
+
+*.log
