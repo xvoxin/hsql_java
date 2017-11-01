@@ -54,6 +54,15 @@ public class InstrumentManagerImpl implements InstrumentManager{
 		}
 	}
 
+	void clearInstruments() {
+		try {
+			PreparedStatement stmt = conn.prepareStatement("delete from instrument");
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public int addInstrument(Instrument inst) {
 		int count = 0;
@@ -64,7 +73,7 @@ public class InstrumentManagerImpl implements InstrumentManager{
             stmt.setString(2, inst.getName());
             stmt.setDouble(3, inst.getPrice());
             
-            count = stmt.executeUpdate(query);
+            count = stmt.executeUpdate();
             
             
 		} catch(SQLException e){
@@ -74,13 +83,43 @@ public class InstrumentManagerImpl implements InstrumentManager{
 }
 
 	@Override
-	public void deleteInstrument(long id) {
-		// TODO Auto-generated method stub
-		
+	public boolean deleteInstrument(long id) {
+		String query = "delete from instrument where id = " + (int)id;
+		try{
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.executeUpdate();
+
+		} catch (SQLException e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
-	public List<Instrument> getInstrument() {
+	public Instrument getInstrument(String name) {
+		Instrument inst = new Instrument();
+
+		try{
+			String query = "select * from instrument where name = '" + name + "'";
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			while(rs.next()){
+				inst.setId(rs.getLong("id"));
+				inst.setBrand(rs.getString("brand"));
+				inst.setName(rs.getString("name"));
+				inst.setPrice(rs.getDouble("price"));
+			}
+
+		} catch(SQLException e){
+			e.printStackTrace();
+		}
+		return inst;
+	}
+
+	@Override
+	public List<Instrument> getAllInstrument() {
 		List<Instrument> instruments = new ArrayList<>();
 		try{		
 			String query = "select * from instrument;";
@@ -103,9 +142,18 @@ public class InstrumentManagerImpl implements InstrumentManager{
 	}
 
 	@Override
-	public Instrument updateInstrument(long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean updateInstrument(Instrument inst) {
+		try{
+			String query = "update instrument set brand = ?, name = ?, price = ? where id = " + inst.getId();
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setString(1, inst.getBrand());
+			stmt.setString(2, inst.getName());
+			stmt.setDouble(3, inst.getPrice());
+		} catch (SQLException e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	Connection getConnection() {

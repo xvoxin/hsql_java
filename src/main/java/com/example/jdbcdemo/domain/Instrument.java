@@ -20,6 +20,8 @@ public class Instrument {
 		this.price = price;
 	}
 
+	public Instrument () { }
+
 	public long getId() {
 		return id;
 	}

@@ -6,9 +6,10 @@ import com.example.jdbcdemo.domain.Instrument;
 
 public interface InstrumentManager {
 	
-	public int addInstrument(Instrument inst);
-	public void deleteInstrument(long id);
-	public List<Instrument> getInstrument();
-	public Instrument updateInstrument(long id);
+	int addInstrument(Instrument inst);
+	boolean deleteInstrument(long id);
+	Instrument getInstrument(String name);
+	List<Instrument> getAllInstrument();
+	boolean updateInstrument(Instrument inst);
 
 }
