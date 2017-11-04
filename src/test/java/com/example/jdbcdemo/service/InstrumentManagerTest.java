@@ -11,7 +11,7 @@ import com.example.jdbcdemo.domain.Instrument;
 public class InstrumentManagerTest {
 
 
-	InstrumentManagerImpl inst = new InstrumentManagerImpl();
+	InstrumentManagerImpl manager = new InstrumentManagerImpl();
 
 
 	private final static String BRAND_1 = "Gibson";
@@ -21,24 +21,24 @@ public class InstrumentManagerTest {
 
 	@Test
 	public void checkConnection(){
-		assertNotNull(inst.getConnection());
+		assertNotNull(manager.getConnection());
 	}
 
 	@Test
-	public void checkAdding(){
+	public void checkAddingAndGetting(){
 
-		Instrument instrument = new Instrument(1, BRAND_1, NAME_1, PRICE_1);
+		Instrument instrument = new Instrument(BRAND_1, NAME_1, PRICE_1);
 
-		inst.clearInstruments();
-		assertEquals(1, inst.addInstrument(instrument));
+		manager.clearInstruments();
+		assertEquals(1, manager.addInstrument(instrument));
 
-		List<Instrument> instruments = inst.getAllInstrument();
+		List<Instrument> instruments = manager.getAllInstrument();
 		Instrument instrumentRetrieved = instruments.get(0);
 
 		assertEquals(NAME_1, instrumentRetrieved.getName());
 		assertEquals(BRAND_1, instrumentRetrieved.getBrand());
 
-        instrumentRetrieved = inst.getInstrument(NAME_1);
+        instrumentRetrieved = manager.getInstrument(NAME_1);
         assertEquals(NAME_1, instrumentRetrieved.getName());
 
 	}
@@ -46,15 +46,29 @@ public class InstrumentManagerTest {
 	@Test
     public void checkDeleting(){
 
-	    assertEquals(true, inst.deleteInstrument(1));
+		Instrument instrument = new Instrument(BRAND_1, NAME_1, PRICE_1);
+
+		manager.clearInstruments();
+		manager.addInstrument(instrument);
+        Instrument instrumentRetrieved = manager.getInstrument(NAME_1);
+
+	    assertEquals(1, manager.deleteInstrument(instrumentRetrieved.getId()));
     }
 
     @Test
     public void checkUpdate(){
 
         Instrument instrument = new Instrument(BRAND_1, NAME_1, PRICE_1);
-        instrument.setBrand("Epiphone");
-        assertEquals(true, inst.updateInstrument(instrument));
+
+        manager.clearInstruments();
+        manager.addInstrument(instrument);
+        Instrument instrumentRetrieved = manager.getInstrument(NAME_1);
+
+        instrumentRetrieved.setBrand("Epiphone");
+        assertEquals(1, manager.updateInstrument(instrumentRetrieved));
+
+        instrumentRetrieved = manager.getInstrument(NAME_1);
+        assertEquals("Epiphone", instrumentRetrieved.getBrand());
     }
 
 }

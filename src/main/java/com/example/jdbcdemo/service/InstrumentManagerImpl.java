@@ -83,17 +83,18 @@ public class InstrumentManagerImpl implements InstrumentManager{
 }
 
 	@Override
-	public boolean deleteInstrument(long id) {
+	public int deleteInstrument(long id) {
+		int count = 0;
 		String query = "delete from instrument where id = " + (int)id;
 		try{
 			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.executeUpdate();
+			count = stmt.executeUpdate();
 
 		} catch (SQLException e){
 			e.printStackTrace();
-			return false;
+			return 0;
 		}
-		return true;
+		return count;
 	}
 
 	@Override
@@ -142,18 +143,20 @@ public class InstrumentManagerImpl implements InstrumentManager{
 	}
 
 	@Override
-	public boolean updateInstrument(Instrument inst) {
+	public int updateInstrument(Instrument inst) {
+		int count = 0;
 		try{
 			String query = "update instrument set brand = ?, name = ?, price = ? where id = " + inst.getId();
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setString(1, inst.getBrand());
 			stmt.setString(2, inst.getName());
 			stmt.setDouble(3, inst.getPrice());
+            count = stmt.executeUpdate();
 		} catch (SQLException e){
 			e.printStackTrace();
-			return false;
+			return 0;
 		}
-		return true;
+		return count;
 	}
 	
 	Connection getConnection() {
