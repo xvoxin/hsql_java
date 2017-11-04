@@ -42,13 +42,6 @@ public class InstrumentManagerImpl implements InstrumentManager{
 			if (!tableExists)
 				statement.executeUpdate(createTable);
 
-//			addPersonStmt = connection
-//					.prepareStatement("INSERT INTO Person (name, yob) VALUES (?, ?)");
-//			deleteAllPersonsStmt = connection
-//					.prepareStatement("DELETE FROM Person");
-//			getAllPersonsStmt = connection
-//					.prepareStatement("SELECT id, name, yob FROM Person");
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
