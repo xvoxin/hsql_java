@@ -20,6 +20,11 @@ public class Instrument {
 		this.price = price;
 	}
 
+	public Instrument(String brand, double price){
+		this.brand = brand;
+		this.price = price;
+	}
+
 	public Instrument () { }
 
 	public long getId() {
