@@ -2,7 +2,7 @@ package com.example.shdemo.domain;
 
 
 import javax.persistence.*;
-
+@Entity
 @NamedQueries({
         @NamedQuery(name = "instrument.all", query = "Select i from Instrument i"),
         @NamedQuery(name = "instrument.byName", query = "Select i from Instrument i where i.name = :name")
@@ -13,6 +13,7 @@ public class Instrument {
     private String brand;
     private String name;
     private double price;
+    private Factory factory;
 
     public Instrument(long id, String brand, String name, double price){
         this.id = id;
@@ -67,5 +68,16 @@ public class Instrument {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public Factory getFactory() {
+        return factory;
+    }
+
+    public void setFactory(Factory factory) {
+        this.factory = factory;
+    }
+
+
 
 }
