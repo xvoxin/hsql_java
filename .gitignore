@@ -1,0 +1,59 @@
+# use glob syntax.
+syntax: glob
+*.class
+*~
+*.bak
+*.old
+*.pdf
+
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# logs
+*.log
+
+# eclipse conf file
+.settings
+.settings/
+.classpath
+.project
+.springBeans
+
+
+# building
+target
+tmp*
+dist
+test-output
+
+# other scm
+.svn
+.CVS
+.hg*
+
+# switch to regexp syntax.
+#  syntax: regexp
+#  ^\.pc/
+
