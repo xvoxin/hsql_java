@@ -15,22 +15,11 @@ public class Instrument {
     private double price;
     private Factory factory;
 
-    public Instrument(long id, String brand, String name, double price){
-        this.id = id;
+    public Instrument(String brand, String name, double price, Factory factory){
         this.brand = brand;
         this.name = name;
         this.price = price;
-    }
-
-    public Instrument(String brand, String name, double price){
-        this.brand = brand;
-        this.name = name;
-        this.price = price;
-    }
-
-    public Instrument(String brand, double price){
-        this.brand = brand;
-        this.price = price;
+        this.factory = factory;
     }
 
     public Instrument () { }
@@ -69,7 +58,7 @@ public class Instrument {
         this.price = price;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public Factory getFactory() {
         return factory;
     }

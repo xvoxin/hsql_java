@@ -16,8 +16,23 @@ public class Client {
 
     private Long id;
     private String name = "unknown";
+    private String surname = "unknown";
     private Date registrationDate = new Date();
     private List<Instrument> instruments = new ArrayList<Instrument>();
+
+    public Client(String name, String surname, Date date, List<Instrument> instruments){
+        this.name = name;
+        this.surname = surname;
+        this.registrationDate = date;
+        this.instruments = instruments;
+    }
+
+    public Client(String name, String surname){
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public Client(){ }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,6 +50,14 @@ public class Client {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public Date getRegistrationDate() {

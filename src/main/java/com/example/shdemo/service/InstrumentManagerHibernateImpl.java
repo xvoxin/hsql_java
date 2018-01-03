@@ -3,7 +3,6 @@ package com.example.shdemo.service;
 import com.example.shdemo.domain.Client;
 import com.example.shdemo.domain.Factory;
 import com.example.shdemo.domain.Instrument;
-import com.sun.org.apache.bcel.internal.generic.FADD;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,7 +35,7 @@ public class InstrumentManagerHibernateImpl implements InstrumentManager{
     }
 
     @Override
-    public void addAllInstruments(List<Instrument> inst) {
+    public void addAllInstruments(ArrayList<Instrument> inst) {
         for(Instrument instrument : inst){
             instrument.setId(null);
             sessionFactory.getCurrentSession().persist(instrument);
@@ -49,7 +48,7 @@ public class InstrumentManagerHibernateImpl implements InstrumentManager{
     }
 
     @Override
-    public void deleteAllInstruments(List<Instrument> inst) {
+    public void deleteAllInstruments(ArrayList<Instrument> inst) {
         for(Instrument instrument : inst){
             sessionFactory.getCurrentSession().delete(instrument);
         }
@@ -91,7 +90,7 @@ public class InstrumentManagerHibernateImpl implements InstrumentManager{
     }
 
     @Override
-    public void addAllClients(List<Client> clients) {
+    public void addAllClients(ArrayList<Client> clients) {
         for(Client client : clients){
             client.setId(null);
             sessionFactory.getCurrentSession().persist(client);
@@ -104,7 +103,7 @@ public class InstrumentManagerHibernateImpl implements InstrumentManager{
     }
 
     @Override
-    public void deleteAllClients(List<Client> clients) {
+    public void deleteAllClients(ArrayList<Client> clients) {
         for(Client client : clients){
             sessionFactory.getCurrentSession().delete(client);
         }
@@ -152,10 +151,10 @@ public class InstrumentManagerHibernateImpl implements InstrumentManager{
     }
 
     @Override
-    public void addAllFactories(List<Factory> factories) {
+    public void addAllFactories(ArrayList<Factory> factories) {
         for(Factory factory : factories){
             factory.setId(null);
-            sessionFactory.getCurrentSession().persist(factories);
+            sessionFactory.getCurrentSession().persist(factory);
         }
     }
 
@@ -165,9 +164,9 @@ public class InstrumentManagerHibernateImpl implements InstrumentManager{
     }
 
     @Override
-    public void deleteAllFactories(List<Factory> factories) {
+    public void deleteAllFactories(ArrayList<Factory> factories) {
         for(Factory factory : factories){
-            sessionFactory.getCurrentSession().delete(factories);
+            sessionFactory.getCurrentSession().delete(factory);
         }
     }
 

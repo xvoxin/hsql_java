@@ -16,8 +16,7 @@ public class Factory
 
     public Factory() { }
 
-    public Factory(Long id, String name, String country){
-        this.id = id;
+    public Factory(String name, String country){
         this.name = name;
         this.country = country;
     }

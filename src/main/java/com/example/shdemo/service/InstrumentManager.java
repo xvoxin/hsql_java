@@ -10,18 +10,18 @@ import com.example.shdemo.domain.Instrument;
 public interface InstrumentManager {
 
     void addInstrument(Instrument inst);
-    void addAllInstruments(List<Instrument> inst);
+    void addAllInstruments(ArrayList<Instrument> inst);
     void deleteInstrument(Instrument inst);
-    void deleteAllInstruments(List<Instrument> inst);
+    void deleteAllInstruments(ArrayList<Instrument> inst);
     Instrument getInstrument(Long id);
     Instrument getInstrumentByName(String name);
     List<Instrument> getAllInstruments();
     void updateInstrument(Instrument inst);
 
     void addClient(Client client);
-    void addAllClients(List<Client> clients);
+    void addAllClients(ArrayList<Client> clients);
     void deleteClient(Client client);
-    void deleteAllClients(List<Client> clients);
+    void deleteAllClients(ArrayList<Client> clients);
     Client getClient(Long id);
     Client getClientByName(String name);
     List<Client> getAllClients();
@@ -29,9 +29,9 @@ public interface InstrumentManager {
     List<Instrument> getOwnedInstruments(Client client);
 
     void addFactory(Factory factory);
-    void addAllFactories(List<Factory> factories);
+    void addAllFactories(ArrayList<Factory> factories);
     void deleteFactory(Factory factory);
-    void deleteAllFactories(List<Factory> factories);
+    void deleteAllFactories(ArrayList<Factory> factories);
     Factory getFactory(Long id);
     Factory getFactoryByName(String name);
     List getAllFactories();
