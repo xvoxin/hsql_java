@@ -22,6 +22,6 @@ public interface InstrumentManager {
 
 	int updateInstrument(Instrument inst);
 
-	void addUpdateDelete(ArrayList<Instrument> inst);
+//	void addUpdateDelete(ArrayList<Instrument> inst);
 
 }

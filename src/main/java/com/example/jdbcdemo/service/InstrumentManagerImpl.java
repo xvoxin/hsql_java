@@ -109,9 +109,10 @@ public class InstrumentManagerImpl implements InstrumentManager{
 	@Override
 	public int deleteInstrument(long id) {
 		int count = 0;
-		String query = "delete from instrument where id = " + (int)id;
+		String query = "delete from instrument where id = ?";
 		try{
 			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setInt(1, (int)id);
 			count = stmt.executeUpdate();
 
 		} catch (SQLException e){
@@ -154,9 +155,10 @@ public class InstrumentManagerImpl implements InstrumentManager{
 		Instrument inst = new Instrument();
 
 		try{
-			String query = "select * from instrument where name = '" + name + "'";
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(query);
+			String query = "select * from instrument where name = ?";
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setString(1, name);
+			ResultSet rs = stmt.executeQuery();
 
 			while(rs.next()){
 				inst.setId(rs.getLong("id"));
@@ -176,8 +178,8 @@ public class InstrumentManagerImpl implements InstrumentManager{
 		List<Instrument> instruments = new ArrayList<>();
 		try{		
 			String query = "select * from instrument;";
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
             
             while(rs.next()){
             	long id = rs.getLong("id");
@@ -198,11 +200,13 @@ public class InstrumentManagerImpl implements InstrumentManager{
 	public int updateInstrument(Instrument inst) {
 		int count = 0;
 		try{
-			String query = "update instrument set brand = ?, name = ?, price = ? where id = " + inst.getId();
+			String query = "update instrument set brand = ?, name = ?, price = ? where id = ?";
+
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setString(1, inst.getBrand());
 			stmt.setString(2, inst.getName());
 			stmt.setDouble(3, inst.getPrice());
+			stmt.setLong(4, inst.getId());
             count = stmt.executeUpdate();
 		} catch (SQLException e){
 			e.printStackTrace();
@@ -211,19 +215,19 @@ public class InstrumentManagerImpl implements InstrumentManager{
 		return count;
 	}
 
-	@Override
-	public void addUpdateDelete(ArrayList<Instrument> inst){
-		try {
-
-		} catch (SQLException e){
-			try {
-			
-			}catch (SQLException ex){
-				ex.printStackTrace();
-			}
-		}
-	}
-	
+//	@Override
+//	public void addUpdateDelete(ArrayList<Instrument> inst){
+//		try {
+//
+//		} catch (SQLException e){
+//			try {
+//
+//			}catch (SQLException ex){
+//				ex.printStackTrace();
+//			}
+//		}
+//	}
+//
 	Connection getConnection() {
 		return conn;
 	}
